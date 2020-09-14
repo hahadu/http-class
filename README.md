@@ -6,4 +6,4 @@ include file ./src/http_class.php;
 
 $http = new \hahadu\httpClass\http();
 
-$http->post('http://192.168.1.113',[]);’
+$http->post('http://youdomain-url',[]);’
