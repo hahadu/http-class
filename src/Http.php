@@ -61,16 +61,17 @@ class Http{
      */
     static public function get($url='', $data_arr=[]) {
         if (empty($url) && empty($data_arr)) {
-            dump($url);
             return false;
         }
         $o = "";
-        foreach ( $data_arr as $k => $v )
-        { 
-            $o.= "$k=" . urlencode( $v ). "&" ;
+        if(!empty($data_arr)){
+            foreach ( $data_arr as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $data_arr = substr($o,0,-1);
+            $url = $url.'?'.$data_arr;
         }
-        $data_arr = substr($o,0,-1);
-        $dataUrl = $url.'?'.$data_arr;
 
         $ch = curl_init();
         if(stripos($url, 'https://') !== FALSE) {
@@ -78,7 +79,7 @@ class Http{
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
             curl_setopt($ch, CURLOPT_SSLVERSION, 1);
         }
-        curl_setopt($ch, CURLOPT_URL, $dataUrl);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
         $content = curl_exec($ch);
         $status = curl_getinfo($ch);
