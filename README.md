@@ -2,8 +2,14 @@
 http post/get方式提交数据
 
 
-include file ./src/http_class.php;
+安装 composer require hahadu/http-class
 
-$http = new \hahadu\httpClass\http();
+$http = new \Hahadu\HttpClass\Http();
 
-$http->post('http://youdomain-url',[]);’
+```puml
+
+$http->post('http://url',array());’
+
+$http->get('http://url',array());’
+
+```

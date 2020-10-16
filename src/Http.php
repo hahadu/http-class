@@ -18,7 +18,7 @@ class Http{
      *@param string $url
      *@param array $post_data
      */
-    public function post($url = '', $post_data = array()) {
+    static public function post($url = '', $post_data = array()) {
         if (empty($url) || empty($post_data)) {
             return false;
         }
@@ -59,8 +59,9 @@ class Http{
      * @param string $data_arr
      * @return mixed|boolean
      */
-    public function get($url='', $data_arr=array()) {
-        if (empty($url) || empty($data_arr)) {
+    static public function get($url='', $data_arr=[]) {
+        if (empty($url) && empty($data_arr)) {
+            dump($url);
             return false;
         }
         $o = "";
