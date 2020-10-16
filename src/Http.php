@@ -11,8 +11,8 @@
 // | Author: hahadu <582167246@qq.com>
 // +----------------------------------------------------------------------
 
-namespace hahadu\httpClass;
-class http{
+namespace Hahadu\HttpClass;
+class Http{
     /**
      *http curl post提交数据
      *@param string $url
@@ -34,9 +34,9 @@ class http{
         $curlPost = $post_data;
         $ch = curl_init();//初始化curl
         if(stripos($url, 'https://') !== FALSE) {
-            curl_setopt($cl, CURLOPT_SSL_VERIFYPEER, FALSE);
-            curl_setopt($cl, CURLOPT_SSL_VERIFYHOST, FALSE);
-            curl_setopt($cl, CURLOPT_SSLVERSION, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_SSLVERSION, 1);
         }
         curl_setopt($ch, CURLOPT_URL,$postUrl);//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
@@ -56,32 +56,32 @@ class http{
     /**
      * http curl get
      * @param string $url
-     * @param string post_data
+     * @param string $data_arr
      * @return mixed|boolean
      */
-    public function get($url='', $post_data=array()) {
-        if (empty($url) || empty($post_data)) {
+    public function get($url='', $data_arr=array()) {
+        if (empty($url) || empty($data_arr)) {
             return false;
         }
         $o = "";
-        foreach ( $post_data as $k => $v ) 
+        foreach ( $data_arr as $k => $v )
         { 
             $o.= "$k=" . urlencode( $v ). "&" ;
         }
-        $post_data = substr($o,0,-1);
-        $dataUrl = $url.'?'.$post_data;
+        $data_arr = substr($o,0,-1);
+        $dataUrl = $url.'?'.$data_arr;
 
-		$cl = curl_init();
+        $ch = curl_init();
         if(stripos($url, 'https://') !== FALSE) {
-            curl_setopt($cl, CURLOPT_SSL_VERIFYPEER, FALSE);
-            curl_setopt($cl, CURLOPT_SSL_VERIFYHOST, FALSE);
-            curl_setopt($cl, CURLOPT_SSLVERSION, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_SSLVERSION, 1);
         }
-        curl_setopt($cl, CURLOPT_URL, $dataUrl);
-        curl_setopt($cl, CURLOPT_RETURNTRANSFER, 1 );
-        $content = curl_exec($cl);
-        $status = curl_getinfo($cl);
-        curl_close($cl);
+        curl_setopt($ch, CURLOPT_URL, $dataUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        $content = curl_exec($ch);
+        $status = curl_getinfo($ch);
+        curl_close($ch);
         if (isset($status['http_code']) && $status['http_code'] == 200) {
             return $content;
         } else {

@@ -1,0 +1,25 @@
+{
+    "name": "hahadu/http-class",
+    "description": "get , post",
+    "type": "library",
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "php": ">=7.0"
+
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "hahadu",
+            "email": "582167246@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hahadu\\HttpClass\\": "src/"
+        }
+    },
+        "minimum-stability": "dev"
+}
