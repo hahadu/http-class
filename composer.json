@@ -6,7 +6,9 @@
         "php": ">=7.0"
     },
     "require-dev": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "ext-curl": "*"
+
 
     },
     "license": "Apache-2.0",
