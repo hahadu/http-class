@@ -12,7 +12,7 @@
 // +----------------------------------------------------------------------
 
 namespace Hahadu\HttpClass;
-class Http{
+class HttpClient{
     /**
      *http curl post提交数据
      *@param string $url
