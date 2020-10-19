@@ -22,17 +22,10 @@ class CurlClient{
         if (empty($url) || empty($post_data)) {
             return false;
         }
-/*
-        $o = "";
-        foreach ( $post_data as $k => $v ) 
-        {
-            dump($v);
-            $o.= "$k=" . urlencode( $v ). "&" ;
+        if(is_array($post_data)){
+            $post_data = http_build_query($post_data);
         }
-        $post_data = substr($o,0,-1);
-*/
 
-        $post_data = http_build_query($post_data);
         $ch = curl_init();//初始化curl
         if(stripos($url, 'https://') !== FALSE) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
