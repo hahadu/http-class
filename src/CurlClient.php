@@ -22,27 +22,28 @@ class CurlClient{
         if (empty($url) || empty($post_data)) {
             return false;
         }
-
+/*
         $o = "";
         foreach ( $post_data as $k => $v ) 
-        { 
+        {
+            dump($v);
             $o.= "$k=" . urlencode( $v ). "&" ;
         }
         $post_data = substr($o,0,-1);
+*/
 
-        $postUrl = $url;
-        $curlPost = $post_data;
+        $post_data = http_build_query($post_data);
         $ch = curl_init();//初始化curl
         if(stripos($url, 'https://') !== FALSE) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
             curl_setopt($ch, CURLOPT_SSLVERSION, 1);
         }
-        curl_setopt($ch, CURLOPT_URL,$postUrl);//抓取指定网页
+        curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
-        curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+        curl_setopt($ch, CURLOPT_POST, TRUE);//post提交方式
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
         $content = curl_exec($ch);//运行curl
 		$status = curl_getinfo($ch);
         curl_close($ch);
